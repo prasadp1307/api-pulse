@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@api-pulse/database": ["../../packages/database/src/index.ts"],
+      "@api-pulse/shared": ["../../packages/shared/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*"]
+}

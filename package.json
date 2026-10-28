@@ -1,0 +1,23 @@
+{
+  "name": "api-pulse",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @api-pulse/web",
+    "dev:worker": "npm run dev -w @api-pulse/worker",
+    "dev:all": "concurrently \"npm run dev -w @api-pulse/web\" \"npm run dev -w @api-pulse/worker\"",
+    "build": "npm run build -w @api-pulse/database && npm run build -w @api-pulse/web && npm run build -w @api-pulse/worker",
+    "db:generate": "npm run generate -w @api-pulse/database",
+    "db:push": "npm run push -w @api-pulse/database",
+    "db:seed": "npm run seed -w @api-pulse/database",
+    "setup": "docker compose up -d && npm run db:generate && npm run db:push && npm run db:seed",
+    "lint": "npm run lint -w @api-pulse/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  }
+}

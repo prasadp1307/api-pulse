@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "collection": {
+    "name": "Live Demo APIs",
+    "description": "Public endpoints for API Workspace testing (no API key required except Bearer demo).",
+    "requests": [
+      {
+        "name": "1. HTTPBin — GET echo",
+        "method": "GET",
+        "url": "https://httpbin.org/get?source=api-pulse&demo=1",
+        "headers": [{ "key": "Accept", "value": "application/json", "enabled": true }],
+        "queryParams": [],
+        "body": null,
+        "bodyType": "json",
+        "authType": "none",
+        "testScript": "assert(response.status === 200, 'status 200');\nassert(response.json.url.includes('api-pulse'), 'query echoed');"
+      },
+      {
+        "name": "2. HTTPBin — POST JSON",
+        "method": "POST",
+        "url": "https://httpbin.org/post",
+        "headers": [{ "key": "Content-Type", "value": "application/json", "enabled": true }],
+        "queryParams": [],
+        "body": "{\"title\":\"API Pulse test\",\"done\":false}",
+        "bodyType": "json",
+        "authType": "none",
+        "testScript": "assert(response.status === 200);\nassert(response.json.json.title === 'API Pulse test');"
+      },
+      {
+        "name": "3. HTTPBin — Status 200",
+        "method": "GET",
+        "url": "https://httpbin.org/status/200",
+        "headers": [],
+        "queryParams": [],
+        "authType": "none",
+        "testScript": "assert(response.status === 200, 'uptime probe style check');"
+      },
+      {
+        "name": "4. JSONPlaceholder — Get post",
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1",
+        "headers": [{ "key": "Accept", "value": "application/json", "enabled": true }],
+        "queryParams": [],
+        "authType": "none",
+        "testScript": "assert(response.status === 200);\nassert(response.json.id === 1);"
+      },
+      {
+        "name": "5. JSONPlaceholder — Create post",
+        "method": "POST",
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "headers": [{ "key": "Content-Type", "value": "application/json", "enabled": true }],
+        "body": "{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}",
+        "bodyType": "json",
+        "authType": "none",
+        "testScript": "assert(response.status === 201, 'created');"
+      },
+      {
+        "name": "6. GitHub — Zen quote",
+        "method": "GET",
+        "url": "https://api.github.com/zen",
+        "headers": [{ "key": "Accept", "value": "text/plain", "enabled": true }],
+        "queryParams": [],
+        "authType": "none",
+        "testScript": "assert(response.status === 200);\nassert(response.body.length > 5, 'non-empty quote');"
+      },
+      {
+        "name": "7. REST Countries — India",
+        "method": "GET",
+        "url": "https://restcountries.com/v3.1/alpha/in",
+        "headers": [{ "key": "Accept", "value": "application/json", "enabled": true }],
+        "queryParams": [],
+        "authType": "none",
+        "testScript": "assert(response.status === 200);\nassert(Array.isArray(response.json), 'array response');"
+      },
+      {
+        "name": "8. HTTPBin — Bearer token",
+        "method": "GET",
+        "url": "https://httpbin.org/bearer",
+        "headers": [],
+        "queryParams": [],
+        "authType": "bearer",
+        "authConfig": { "type": "bearer", "token": "api-pulse-demo-token" },
+        "testScript": "assert(response.status === 200);\nassert(response.json.authenticated === true);"
+      }
+    ]
+  }
+}
